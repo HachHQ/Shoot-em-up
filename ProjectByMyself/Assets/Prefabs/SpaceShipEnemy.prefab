@@ -141,6 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc790d192c801d34ba6d80e31bf42406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletEnemyPrefab: {fileID: 3677772938641543657, guid: 718506c6ddcd55d43974bd7c822b2154, type: 3}
+  fireRate: 3
+  CanShoot: 1
+  speedOfBullet: 5
 --- !u!60 &4796275393204204068
 PolygonCollider2D:
   m_ObjectHideFlags: 0

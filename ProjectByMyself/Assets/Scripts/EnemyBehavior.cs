@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,11 +5,12 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    //[SerializeField] private GameObject playerPrefab;
-    //[SerializeField] private GameObject bulletEnemyPrefab;
-    //private Rigidbody2D bulletEnemyPrefabRb;
+    [SerializeField] private GameObject bulletEnemyPrefab;
+    private Rigidbody2D bulletEnemyPrefabRb;
 
-    //public float speedOfBullet = 5f;
+    public int fireRate = 3;
+    public bool CanShoot;
+    public float speedOfBullet = 5f;
     
     private int _enemyLives = 3;
     public int enemyLives
@@ -31,24 +31,27 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    /*private void Start()
+    private void Start()
     {
-        //Rigidbody2D playerPrefabRB = playerPrefab.GetComponent<Rigidbody2D>();
-        //bulletEnemyPrefabRb = GetComponent<Rigidbody2D>();
+        bulletEnemyPrefabRb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        //StartCoroutine(ShotWithDelay());
-    }*/
+        InvokeRepeating("EnemyShoot", UnityEngine.Random.Range(0, 4f), fireRate);
+    }
 
-    /*IEnumerator ShotWithDelay()
+    public void EnemyShoot()
     {
-        yield return new WaitForSeconds(5);
-        GameObject bulletPrefab = Instantiate(bulletEnemyPrefab, new Vector3(0f, -0.5f, 0f), Quaternion.identity);
-        Rigidbody2D bulletPrefabRB = bulletPrefab.GetComponent<Rigidbody2D>();
-        bulletPrefabRB.velocity = new Vector2(playerPrefab.transform.position.x, 0) * speedOfBullet;
-    }*/
+        if (CanShoot)
+        {
+            GameObject newBullet = Instantiate(bulletEnemyPrefab, new Vector3(0, -1, 0), Quaternion.identity);
+            Rigidbody2D newBulletRB = newBullet.GetComponent<Rigidbody2D>();
+            newBulletRB.velocity = Vector3.down * speedOfBullet;
+        }
+    }
+
+    
 
     private void OnCollisionEnter2D (Collision2D col)
     {
