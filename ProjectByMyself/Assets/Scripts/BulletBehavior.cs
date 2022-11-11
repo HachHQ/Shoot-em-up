@@ -7,17 +7,18 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    private float timeToDestroy = 1f;
+    //private float timeToDestroy = 1f;
     void Start()
     {
-        Destroy(this.gameObject, timeToDestroy);
+        //Destroy(this.gameObject, timeToDestroy);
     }
 
     private void OnCollisionEnter2D (Collision2D col)
     {
-        if (col.gameObject.name == "SpaceShipEnemy(Clone)")
+        if (col.gameObject.name == "SpaceShipEnemy(Clone)" || col.gameObject.name == "BorderBounds")
         {
             Destroy(this.gameObject);
+
         }
     }
 }

@@ -8,7 +8,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private GameObject bulletEnemyPrefab;
     private Rigidbody2D bulletEnemyPrefabRb;
 
-    public int fireRate = 3;
+    public float fireRate = 3f;
     public bool CanShoot;
     public float speedOfBullet = 5f;
     
@@ -34,24 +34,26 @@ public class EnemyBehavior : MonoBehaviour
     private void Start()
     {
         bulletEnemyPrefabRb = GetComponent<Rigidbody2D>();
-    }
+        fireRate = fireRate + Random.Range(-.5f, 1f);
+		InvokeRepeating("EnemyShoot", fireRate, fireRate);
+	}
 
     private void FixedUpdate()
     {
-        InvokeRepeating("EnemyShoot", UnityEngine.Random.Range(0, 4f), fireRate);
+        
     }
 
     public void EnemyShoot()
     {
         if (CanShoot)
         {
-            GameObject newBullet = Instantiate(bulletEnemyPrefab, new Vector3(0, -1, 0), Quaternion.identity);
+            GameObject newBullet = Instantiate(bulletEnemyPrefab, transform.position + new Vector3(0f, -0.5f, 0f), Quaternion.identity);
             Rigidbody2D newBulletRB = newBullet.GetComponent<Rigidbody2D>();
             newBulletRB.velocity = Vector3.down * speedOfBullet;
         }
     }
 
-    
+        
 
     private void OnCollisionEnter2D (Collision2D col)
     {

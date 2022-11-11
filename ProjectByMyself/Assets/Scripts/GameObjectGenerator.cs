@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameObjectGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    
+    [SerializeField] private float speedOfTranslate = 1f;
+    private Transform GameObjGenerate;
     private Rigidbody2D enemyPrefabRB;
 
     public GameObject playerShipPrefab;
@@ -17,6 +18,8 @@ public class GameObjectGenerator : MonoBehaviour
     
     void Awake()
     {
+        GameObjGenerate = GetComponent<Transform>();
+
         Instantiate(playerShipPrefab, new Vector3(0f, -3f, 0f), Quaternion.identity);
         
         enemyPrefabRB = GetComponent<Rigidbody2D>();
@@ -31,7 +34,8 @@ public class GameObjectGenerator : MonoBehaviour
                 float posY = -(offSetY * j) + startPos.y;
                 enemyPrefab.transform.position = new Vector3(posX, posY, startPos.z);
                 
-                Instantiate(enemyPrefab);
+                GameObject enemy = Instantiate(enemyPrefab);
+                enemy.transform.SetParent(GameObjGenerate);
             }
         }
     
@@ -39,6 +43,17 @@ public class GameObjectGenerator : MonoBehaviour
     
     void Update()
     {
-        
+        Vector2 pos = transform.position;
+        pos.x += speedOfTranslate * Time.deltaTime;
+        transform.position = pos;
+
+        if (pos.x < -8.5f)
+        {
+            speedOfTranslate = Random.Range(Mathf.Abs(speedOfTranslate), 2f);
+        }
+        else if(pos.x > 2.5f)
+        {
+            speedOfTranslate = -Random.Range(2f, Mathf.Abs(speedOfTranslate));
+		}
     }
 }

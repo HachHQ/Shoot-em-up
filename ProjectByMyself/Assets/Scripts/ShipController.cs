@@ -18,7 +18,7 @@ public class ShipController : MonoBehaviour
         _bodyShipRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-    
+
     void FixedUpdate()
     {
         _deltaX = Input.GetAxis("Horizontal");
