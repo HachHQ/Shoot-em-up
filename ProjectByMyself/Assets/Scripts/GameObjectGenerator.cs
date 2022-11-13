@@ -49,11 +49,11 @@ public class GameObjectGenerator : MonoBehaviour
 
         if (pos.x < -8.5f)
         {
-            speedOfTranslate = Random.Range(Mathf.Abs(speedOfTranslate), 2f);
+            speedOfTranslate = Random.Range(speedOfTranslate, 2f);
         }
         else if(pos.x > 2.5f)
         {
-            speedOfTranslate = -Random.Range(2f, Mathf.Abs(speedOfTranslate));
+            speedOfTranslate = -Random.Range(2f, speedOfTranslate);
 		}
     }
 }

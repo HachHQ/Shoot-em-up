@@ -34,7 +34,7 @@ public class EnemyBehavior : MonoBehaviour
     private void Start()
     {
         bulletEnemyPrefabRb = GetComponent<Rigidbody2D>();
-        fireRate = fireRate + Random.Range(-.5f, 1f);
+        fireRate = fireRate + Random.Range(0, 3f);
 		InvokeRepeating("EnemyShoot", fireRate, fireRate);
 	}
 
