@@ -51,7 +51,7 @@ public class GameObjectGenerator : MonoBehaviour
         {
             speedOfTranslate = Random.Range(speedOfTranslate, 2f);
         }
-        else if(pos.x > 2.5f)
+        else if (pos.x > 2.5f)
         {
             speedOfTranslate = -Random.Range(2f, speedOfTranslate);
 		}

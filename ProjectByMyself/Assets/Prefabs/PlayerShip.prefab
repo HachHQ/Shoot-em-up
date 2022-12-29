@@ -144,7 +144,10 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 4539549564913965729, guid: 12837e142766d6d43bd779d58105deee, type: 3}
   animator: {fileID: 6987290023253206225}
   speedOfBullet: 15
-  speedOfShip: 500
+  speedOfShip: 400
+  forceOfBullet: 100
+  delayStart: 0
+  delayFin: 80
 --- !u!60 &6987290023253206232
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using TreeEditor;
 using UnityEngine;
 
 public class ShipController : MonoBehaviour
@@ -8,8 +9,13 @@ public class ShipController : MonoBehaviour
     public Animator animator;
     public float speedOfBullet = 15.0f;
     public float speedOfShip = 1000.0f;
+    public float forceOfBullet = 100f;
+	public float delayStart = 0;
+    public float delayFin = 10f;
 
-    private Rigidbody2D _bodyShipRB;
+	private Rigidbody2D _bodyShipRB;
+
+    
     private float horizontalBounds = 8.16f;
     private float verticalBounds = 4.36f;
     private float _deltaX;
@@ -79,19 +85,27 @@ public class ShipController : MonoBehaviour
 
     private void Update()
     {
-        Shoot();
+		if (Input.GetMouseButton(0) && delayStart > delayFin)
+        {
+			Shoot();
+		}
+        delayStart +=  1;
     }
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+        float angle = -10f;
 
-            GameObject newBullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 1f,0), Quaternion.identity);
-            Rigidbody2D newBulletRB = newBullet.GetComponent<Rigidbody2D>();
-            newBulletRB.transform.rotation *= Quaternion.Euler(0,0,newBullet.transform.rotation.z + 30f);
-            newBulletRB.AddForce(Vector3.forward, ForceMode2D.Impulse);
-            //newBulletRB.velocity = Vector2.up * speedOfBullet;
-        }
-    }
+        int countOfProjectiles = 3;
+
+        for (int i = 0; i < countOfProjectiles; i++)
+        {
+		    GameObject newBullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 1f, 0), Quaternion.identity);
+			Rigidbody2D newBulletRB = newBullet.GetComponent<Rigidbody2D>();
+			newBulletRB.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.up;
+			newBulletRB.AddForce(dir * 300f);
+			angle += 10f;
+		}
+    }   
 }
