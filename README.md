@@ -1,3 +1,2 @@
 # Shoot-em-up
-Прототип с кор геймплеем
-change 
+Classic shoot-em-up prototype
